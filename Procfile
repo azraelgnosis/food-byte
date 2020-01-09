@@ -1,1 +1,1 @@
-web: gunicorn foodbyte.run:app
+web: gunicorn run:app
