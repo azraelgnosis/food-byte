@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header %}  
+    <h1>{% block title %}???{% endblock title %}</h1>
+    <a class="action" href="{{ url_for('food.create_recipe') }}">Add New Recipe</a>
+{% endblock header %}   
+
+{% block content %}
+    {% for recipe in recipes %}
+        <h1>{{ recipe['name'] }}</h1>
+    {% endfor %}
+{% endblock content %}

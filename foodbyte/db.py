@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 import click
 from flask import current_app, g
@@ -13,6 +14,15 @@ def get_db():
         g.db.row_factory = sqlite3.Row
 
     return g.db
+
+def get_recipes():
+    if 'recipes' not in g:
+        path = current_app.config['RECIPES']
+        with open(path, 'r') as f:
+            recipes = json.load(f)
+        g.recipes = recipes
+    
+    return g.recipes
 
 def close_db(e=None):
     db = g.pop('db', None)

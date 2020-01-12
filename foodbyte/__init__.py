@@ -8,6 +8,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'foodbyte.sqlite'),
+        RECIPES=os.path.join(app.instance_path, 'recipes.json'),
     )
 
     if test_config is None:
@@ -33,5 +34,9 @@ def create_app(test_config=None):
 
     from . import auth
     app.register_blueprint(auth.bp)
+
+    from . import food
+    app.register_blueprint(food.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app
